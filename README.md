@@ -143,7 +143,7 @@ controller.start
 - Verde: mensagem `SEGUE AI`, duração `10s`
 - Amarelo: mensagem `FICA LIGADO!`, duração `5s`
 
-## Melhorias Recentes
+## Melhorias Recentes (geradas pelo Claude)
 
 Veja o arquivo [IMPROVEMENTS.md](IMPROVEMENTS.md) para detalhes completos sobre as melhorias implementadas.
 
@@ -154,19 +154,3 @@ Veja o arquivo [IMPROVEMENTS.md](IMPROVEMENTS.md) para detalhes completos sobre 
 - ✅ **Extração de métodos** para melhor legibilidade
 - ✅ **Constantes** em vez de magic numbers
 - ✅ **100% de cobertura** de testes
-
-## Como Contribuir
-
-- Execute RuboCop para garantir estilo consistente:
-
-  ```bash
-  bundle exec rubocop
-  ```
-
-- Rode os testes antes de abrir PRs.
-- Mantenha comentários e documentação sincronizados com o código.
-- Siga os princípios SOLID e padrões de design estabelecidos.
-
-## Licença
-
-Projeto para fins educacionais/demonstração. Licença livre para uso e modificação.
