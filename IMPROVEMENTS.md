@@ -1,3 +1,5 @@
+#Autor: IA Claude 4.5
+
 # Melhorias Implementadas no Código
 
 ## Resumo
@@ -52,11 +54,6 @@ alias eql? ==
 - Permite uso em `Set` e como chave de `Hash`
 - Garante consistência com `==`
 - Segue convenções Ruby
-
-### Testes Adicionados
-- ✅ Validação de parâmetros (6 novos testes)
-- ✅ Imutabilidade (3 novos testes)
-- ✅ Hash e eql? (3 novos testes)
 
 ---
 

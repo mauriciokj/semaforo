@@ -7,7 +7,7 @@ require_relative 'lib/traffic_light_controller'
 #
 # O que foi feito:
 # - Inicialização do controlador do semáforo.
-# - Tratamento de `Ctrl + C` (SIGINT) para encerramento gracioso.
+# - Tratamento de `Ctrl + C` (SIGINT) para encerramento.
 # - Mensagem de início e execução do ciclo.
 module TrafficLight
   class Application
