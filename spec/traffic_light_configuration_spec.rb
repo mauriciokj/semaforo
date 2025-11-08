@@ -6,7 +6,7 @@ require 'spec_helper'
 RSpec.describe TrafficLight::TrafficLightConfiguration do
   describe '.states' do
     # Deve retornar os três estados com cor, mensagem e duração corretamente
-    it 'returns the configured traffic light states' do
+    it 'retorna os estados configurados do semáforo' do
       states = described_class.states
       
       expect(states.length).to eq(3)
@@ -24,14 +24,14 @@ RSpec.describe TrafficLight::TrafficLightConfiguration do
     end
 
     # A coleção deve ser imutável para evitar alterações em runtime
-    it 'returns frozen array to prevent modification' do
+    it 'retorna array congelado para prevenir modificação' do
       expect(described_class.states).to be_frozen
     end
   end
 
   describe '.initial_state' do
     # Estado inicial deve ser vermelho
-    it 'returns the first state (vermelho)' do
+    it 'retorna o primeiro estado (vermelho)' do
       initial_state = described_class.initial_state
       expect(initial_state.color).to eq('vermelho')
       expect(initial_state.message).to eq('PARA!')

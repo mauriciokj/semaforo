@@ -13,7 +13,7 @@
       <img src="./assets/0.13.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2025-11-08T15:40:50-03:00">2025-11-08T15:40:50-03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2025-11-08T16:41:20-03:00">2025-11-08T16:41:20-03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -29,7 +29,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         10.52
+         11.33
        </span>
     </span> hits/line
     )
@@ -42,8 +42,8 @@
   </div>
 
   <div class="t-line-summary">
-    <b>109</b> relevant lines,
-    <span class="green"><b>109</b> lines covered</span> and
+    <b>101</b> relevant lines,
+    <span class="green"><b>101</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed. </span>
     (<span class="green">
   100.0%
@@ -94,11 +94,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#325fc42997c230bf131a323fccebee7cbab722d1" class="src_link" title="lib/traffic_light_controller.rb">lib/traffic_light_controller.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">91</td>
-            <td class="cell--number">40</td>
-            <td class="cell--number">40</td>
+            <td class="cell--number">72</td>
+            <td class="cell--number">32</td>
+            <td class="cell--number">32</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">2.88</td>
+            <td class="cell--number">3.50</td>
             
           </tr>
         
@@ -1147,8 +1147,8 @@
     
 
     <div class="t-line-summary">
-      <b>40</b> relevant lines.
-      <span class="green"><b>40</b> lines covered</span> and
+      <b>32</b> relevant lines.
+      <span class="green"><b>32</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -1249,7 +1249,7 @@
 
             
 
-            <code class="ruby">  # - Extração de métodos privados para melhor legibilidade</code>
+            <code class="ruby">  # - Lógica unificada para durações curtas e longas</code>
           </li>
         </div>
       
@@ -1259,7 +1259,7 @@
 
             
 
-            <code class="ruby">  # - Constante para intervalo de exibição</code>
+            <code class="ruby">  # - Garante ao menos 1 iteração para testes (durações &lt; 1s)</code>
           </li>
         </div>
       
@@ -1269,7 +1269,7 @@
 
             
 
-            <code class="ruby">  # - Métodos mais descritivos e coesos</code>
+            <code class="ruby">  # - Métodos privados descritivos e coesos</code>
           </li>
         </div>
       
@@ -1670,7 +1670,17 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="48">
+          <li class="never" data-hits="" data-linenumber="48">
+            
+
+            
+
+            <code class="ruby">    # Garante ao menos 1 iteração para durações &lt; 1s (usado em testes)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="49">
             
               <span class="hits">1</span>
             
@@ -1682,7 +1692,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="49">
+          <li class="covered" data-hits="3" data-linenumber="50">
             
               <span class="hits">3</span>
             
@@ -1694,16 +1704,6 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="50">
-            
-
-            
-
-            <code class="ruby">      </code>
-          </li>
-        </div>
-      
-        <div>
           <li class="covered" data-hits="3" data-linenumber="51">
             
               <span class="hits">3</span>
@@ -1711,19 +1711,19 @@
 
             
 
-            <code class="ruby">      if short_duration?(duration)</code>
+            <code class="ruby">      total_seconds = [duration.to_i, 1].max</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="52">
+          <li class="covered" data-hits="3" data-linenumber="52">
             
-              <span class="hits">2</span>
-            
-
+              <span class="hits">3</span>
             
 
-            <code class="ruby">        execute_short_duration(duration)</code>
+            
+
+            <code class="ruby">      sleep_time = duration / total_seconds</code>
           </li>
         </div>
       
@@ -1733,166 +1733,14 @@
 
             
 
-            <code class="ruby">      else</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="54">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        execute_normal_duration(duration)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="55">
-            
-
-            
-
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="56">
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="57">
-            
-
-            
-
-            <code class="ruby">    </code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="58">
-            
-
-            
-
-            <code class="ruby">    # Executa durações curtas (&lt; 1s, usado em testes)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="59">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    def execute_short_duration(duration)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="60">
-            
-              <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      display_current_state</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="61">
-            
-              <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      sleep duration</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="62">
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="63">
-            
-
-            
-
-            <code class="ruby">    </code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="64">
-            
-
-            
-
-            <code class="ruby">    # Executa durações normais com exibição a cada segundo</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="65">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    def execute_normal_duration(duration)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="66">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      total_seconds = duration.to_i</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="67">
-            
-
-            
-
             <code class="ruby">      </code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="68">
+          <li class="covered" data-hits="3" data-linenumber="54">
             
-              <span class="hits">1</span>
+              <span class="hits">3</span>
             
 
             
@@ -1902,9 +1750,9 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="69">
+          <li class="covered" data-hits="4" data-linenumber="55">
             
-              <span class="hits">2</span>
+              <span class="hits">4</span>
             
 
             
@@ -1914,7 +1762,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="70">
+          <li class="never" data-hits="" data-linenumber="56">
             
 
             
@@ -1924,9 +1772,9 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="71">
+          <li class="covered" data-hits="4" data-linenumber="57">
             
-              <span class="hits">2</span>
+              <span class="hits">4</span>
             
 
             
@@ -1936,19 +1784,19 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="72">
+          <li class="covered" data-hits="4" data-linenumber="58">
             
-              <span class="hits">2</span>
-            
-
+              <span class="hits">4</span>
             
 
-            <code class="ruby">        sleep DISPLAY_INTERVAL</code>
+            
+
+            <code class="ruby">        sleep sleep_time</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="73">
+          <li class="never" data-hits="" data-linenumber="59">
             
 
             
@@ -1958,7 +1806,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="74">
+          <li class="never" data-hits="" data-linenumber="60">
             
 
             
@@ -1968,7 +1816,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="75">
+          <li class="never" data-hits="" data-linenumber="61">
             
 
             
@@ -1978,61 +1826,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="76">
-            
-
-            
-
-            <code class="ruby">    # Verifica se a duração é curta (menor que o intervalo de exibição)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="77">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    def short_duration?(duration)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="3" data-linenumber="78">
-            
-              <span class="hits">3</span>
-            
-
-            
-
-            <code class="ruby">      duration &amp;&amp; duration &lt; DISPLAY_INTERVAL</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="79">
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="80">
-            
-
-            
-
-            <code class="ruby">    </code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="81">
+          <li class="never" data-hits="" data-linenumber="62">
             
 
             
@@ -2042,7 +1836,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="82">
+          <li class="covered" data-hits="1" data-linenumber="63">
             
               <span class="hits">1</span>
             
@@ -2054,7 +1848,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="83">
+          <li class="covered" data-hits="3" data-linenumber="64">
             
               <span class="hits">3</span>
             
@@ -2066,7 +1860,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="84">
+          <li class="never" data-hits="" data-linenumber="65">
             
 
             
@@ -2076,7 +1870,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="85">
+          <li class="never" data-hits="" data-linenumber="66">
             
 
             
@@ -2086,7 +1880,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="86">
+          <li class="never" data-hits="" data-linenumber="67">
             
 
             
@@ -2096,7 +1890,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="87">
+          <li class="covered" data-hits="1" data-linenumber="68">
             
               <span class="hits">1</span>
             
@@ -2108,7 +1902,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="5" data-linenumber="88">
+          <li class="covered" data-hits="5" data-linenumber="69">
             
               <span class="hits">5</span>
             
@@ -2120,7 +1914,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="89">
+          <li class="never" data-hits="" data-linenumber="70">
             
 
             
@@ -2130,7 +1924,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="90">
+          <li class="never" data-hits="" data-linenumber="71">
             
 
             
@@ -2140,7 +1934,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="91">
+          <li class="never" data-hits="" data-linenumber="72">
             
 
             
@@ -2893,7 +2687,7 @@
 
             
 
-            <code class="ruby"># - Tratamento de `Ctrl + C` (SIGINT) para encerramento gracioso.</code>
+            <code class="ruby"># - Tratamento de `Ctrl + C` (SIGINT) para encerramento.</code>
           </li>
         </div>
       

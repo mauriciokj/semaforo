@@ -6,9 +6,9 @@ module TrafficLight
   # Controla a temporização e as transições do semáforo
   #
   # Melhorias implementadas:
-  # - Extração de métodos privados para melhor legibilidade
-  # - Constante para intervalo de exibição
-  # - Métodos mais descritivos e coesos
+  # - Lógica unificada para durações curtas e longas
+  # - Garante ao menos 1 iteração para testes (durações < 1s)
+  # - Métodos privados descritivos e coesos
   class TrafficLightController
     DISPLAY_INTERVAL = 1 # segundo
     
@@ -45,37 +45,18 @@ module TrafficLight
     end
     
     # Executa o estado atual pelo tempo configurado
+    # Garante ao menos 1 iteração para durações < 1s (usado em testes)
     def execute_current_state
       duration = @traffic_light.current_duration
-      
-      if short_duration?(duration)
-        execute_short_duration(duration)
-      else
-        execute_normal_duration(duration)
-      end
-    end
-    
-    # Executa durações curtas (< 1s, usado em testes)
-    def execute_short_duration(duration)
-      display_current_state
-      sleep duration
-    end
-    
-    # Executa durações normais com exibição a cada segundo
-    def execute_normal_duration(duration)
-      total_seconds = duration.to_i
+      total_seconds = [duration.to_i, 1].max
+      sleep_time = duration / total_seconds
       
       total_seconds.times do
         break unless running?
         
         display_current_state
-        sleep DISPLAY_INTERVAL
+        sleep sleep_time
       end
-    end
-    
-    # Verifica se a duração é curta (menor que o intervalo de exibição)
-    def short_duration?(duration)
-      duration && duration < DISPLAY_INTERVAL
     end
     
     # Faz a transição para o próximo estado se ainda estiver rodando

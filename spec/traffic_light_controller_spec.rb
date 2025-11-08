@@ -19,16 +19,16 @@ RSpec.describe TrafficLight::TrafficLightController do
 
   describe '#initialize' do
     # Deve iniciar com referências corretas e não estar rodando
-    it 'sets the traffic light and output' do
+    it 'define o traffic light e output' do
       expect(subject.instance_variable_get(:@traffic_light)).to eq(mock_traffic_light)
       expect(subject.instance_variable_get(:@output)).to eq(mock_output)
     end
 
-    it 'initializes as not running' do
+    it 'inicializa como não rodando' do
       expect(subject.running?).to be false
     end
     
-    it 'uses default traffic light and output when none provided' do
+    it 'usa traffic light e output padrão quando nenhum é fornecido' do
       controller = described_class.new
       expect(controller.instance_variable_get(:@traffic_light)).to be_a(TrafficLight::TrafficLight)
       expect(controller.instance_variable_get(:@output)).to eq($stdout)
@@ -38,12 +38,12 @@ RSpec.describe TrafficLight::TrafficLightController do
 
   describe '#start' do
     # Inicia o ciclo e chama run_cycle
-    it 'sets running to true' do
+    it 'define running como true' do
       allow(subject).to receive(:run_cycle)
       expect { subject.start }.to change { subject.running? }.from(false).to(true)
     end
 
-    it 'calls run_cycle' do
+    it 'chama run_cycle' do
       expect(subject).to receive(:run_cycle).once.and_return(nil)
       subject.start
     end
@@ -51,7 +51,7 @@ RSpec.describe TrafficLight::TrafficLightController do
 
   describe '#stop' do
     # Deve parar o ciclo
-    it 'sets running to false' do
+    it 'define running como false' do
       allow(subject).to receive(:run_cycle)
       subject.start
       expect { subject.stop }.to change { subject.running? }.from(true).to(false)
@@ -59,13 +59,13 @@ RSpec.describe TrafficLight::TrafficLightController do
   end
 
   describe '#running?' do
-    it 'returns true when started' do
+    it 'retorna true quando iniciado' do
       allow(subject).to receive(:run_cycle)
       subject.start
       expect(subject.running?).to be true
     end
 
-    it 'returns false when stopped' do
+    it 'retorna false quando parado' do
       subject.stop
       expect(subject.running?).to be false
     end
@@ -74,17 +74,17 @@ RSpec.describe TrafficLight::TrafficLightController do
   describe 'private methods' do
     describe '#display_current_state' do
       # Deve escrever no output injetado
-      it 'outputs the current message' do
+      it 'exibe a mensagem atual' do
         subject.send(:display_current_state)
         expect(mock_output.string).to eq("PARA!\n")
       end
     end
 
     describe '#run_cycle' do
-      it 'displays current state and transitions to next state' do
+      it 'exibe estado atual e faz transição para próximo estado' do
         allow(subject).to receive(:sleep)
-        # Com duration 0.1: running? é chamado: 1) no while, 2) no transition_to_next_state, 3) no while novamente
-        allow(subject).to receive(:running?).and_return(true, true, false)
+        # Com duration 0.1: running? é chamado: 1) no while, 2) no times.do (1x), 3) no transition_to_next_state, 4) no while novamente
+        allow(subject).to receive(:running?).and_return(true, true, true, false)
 
         expect(mock_traffic_light).to receive(:current_message).at_least(:once)
         expect(mock_traffic_light).to receive(:current_duration).at_least(:once)
@@ -93,7 +93,7 @@ RSpec.describe TrafficLight::TrafficLightController do
         subject.send(:run_cycle)
       end
 
-      it 'stops cycling when running is false' do
+      it 'para o ciclo quando running é false' do
         allow(subject).to receive(:sleep)
         allow(subject).to receive(:running?).and_return(false)
 
@@ -102,27 +102,27 @@ RSpec.describe TrafficLight::TrafficLightController do
         subject.send(:run_cycle)
       end
       
-      it 'handles durations less than 1 second' do
+      it 'trata durações menores que 1 segundo (garante 1 iteração)' do
         allow(mock_traffic_light).to receive(:current_duration).and_return(0.5)
         allow(subject).to receive(:sleep)
-        # running? é chamado: 1) no while, 2) no transition_to_next_state, 3) no while novamente
-        allow(subject).to receive(:running?).and_return(true, true, false)
+        # running? é chamado: 1) no while, 2) no times.do (1x), 3) no transition_to_next_state, 4) no while novamente
+        allow(subject).to receive(:running?).and_return(true, true, true, false)
 
-        expect(mock_traffic_light).to receive(:current_message).at_least(:once)
-        expect(subject).to receive(:sleep).with(0.5)
+        expect(mock_traffic_light).to receive(:current_message).once
+        expect(subject).to receive(:sleep).with(0.5).once
         expect(mock_traffic_light).to receive(:next_state).once
 
         subject.send(:run_cycle)
       end
       
-      it 'handles durations of 1 second or more with multiple displays' do
+      it 'trata durações de 1 segundo ou mais com múltiplas exibições' do
         allow(mock_traffic_light).to receive(:current_duration).and_return(2)
         allow(subject).to receive(:sleep)
         # running? é chamado: 1) no while, 2) no times.do (2x), 3) no transition_to_next_state, 4) no while novamente
         allow(subject).to receive(:running?).and_return(true, true, true, true, false)
 
-        expect(mock_traffic_light).to receive(:current_message).at_least(2).times
-        expect(subject).to receive(:sleep).with(1).at_least(2).times
+        expect(mock_traffic_light).to receive(:current_message).exactly(2).times
+        expect(subject).to receive(:sleep).with(1).exactly(2).times
         expect(mock_traffic_light).to receive(:next_state).once
 
         subject.send(:run_cycle)

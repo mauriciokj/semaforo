@@ -7,7 +7,7 @@ RSpec.describe TrafficLight::TrafficLightState do
   let(:state) { described_class.new('vermelho', 'PARA!', 15) }
 
   describe '#initialize' do
-    it 'sets the color, message, and duration' do
+    it 'define cor, mensagem e duração' do
       expect(state.color).to eq('vermelho')
       expect(state.message).to eq('PARA!')
       expect(state.duration).to eq(15)
@@ -16,7 +16,7 @@ RSpec.describe TrafficLight::TrafficLightState do
 
   describe '#to_s' do
     # Deve retornar string formatada com a cor em maiúsculas
-    it 'returns a formatted string representation' do
+    it 'retorna representação em string formatada' do
       expect(state.to_s).to eq('VERMELHO: PARA!')
     end
   end
@@ -26,74 +26,74 @@ RSpec.describe TrafficLight::TrafficLightState do
     let(:same_state) { described_class.new('vermelho', 'PARA!', 15) }
     let(:different_state) { described_class.new('verde', 'SEGUE AI', 10) }
 
-    it 'returns true for identical states' do
+    it 'retorna true para estados idênticos' do
       expect(state).to eq(same_state)
     end
 
-    it 'returns false for different states' do
+    it 'retorna false para estados diferentes' do
       expect(state).not_to eq(different_state)
     end
 
-    it 'returns false for non-TrafficLightState objects' do
+    it 'retorna false para objetos que não são TrafficLightState' do
       expect(state).not_to eq('not a state')
     end
   end
   
   describe '#eql?' do
-    it 'behaves the same as ==' do
+    it 'comporta-se igual ao ==' do
       same_state = described_class.new('vermelho', 'PARA!', 15)
       expect(state.eql?(same_state)).to be true
     end
   end
   
   describe '#hash' do
-    it 'returns the same hash for identical states' do
+    it 'retorna o mesmo hash para estados idênticos' do
       same_state = described_class.new('vermelho', 'PARA!', 15)
       expect(state.hash).to eq(same_state.hash)
     end
     
-    it 'returns different hash for different states' do
+    it 'retorna hash diferente para estados diferentes' do
       different_state = described_class.new('verde', 'SEGUE AI', 10)
       expect(state.hash).not_to eq(different_state.hash)
     end
   end
   
-  describe 'immutability' do
-    it 'freezes the object' do
+  describe 'imutabilidade' do
+    it 'congela o objeto' do
       expect(state).to be_frozen
     end
     
-    it 'freezes the color string' do
+    it 'congela a string de cor' do
       expect(state.color).to be_frozen
     end
     
-    it 'freezes the message string' do
+    it 'congela a string de mensagem' do
       expect(state.message).to be_frozen
     end
   end
   
-  describe 'validations' do
-    it 'raises error for nil color' do
+  describe 'validações' do
+    it 'lança erro para cor nil' do
       expect { described_class.new(nil, 'PARA!', 15) }.to raise_error(ArgumentError, /color cannot be nil/)
     end
     
-    it 'raises error for empty color' do
+    it 'lança erro para cor vazia' do
       expect { described_class.new('', 'PARA!', 15) }.to raise_error(ArgumentError, /color cannot be nil/)
     end
     
-    it 'raises error for nil message' do
+    it 'lança erro para mensagem nil' do
       expect { described_class.new('vermelho', nil, 15) }.to raise_error(ArgumentError, /message cannot be nil/)
     end
     
-    it 'raises error for empty message' do
+    it 'lança erro para mensagem vazia' do
       expect { described_class.new('vermelho', '', 15) }.to raise_error(ArgumentError, /message cannot be nil/)
     end
     
-    it 'raises error for zero duration' do
+    it 'lança erro para duração zero' do
       expect { described_class.new('vermelho', 'PARA!', 0) }.to raise_error(ArgumentError, /duration must be positive/)
     end
     
-    it 'raises error for negative duration' do
+    it 'lança erro para duração negativa' do
       expect { described_class.new('vermelho', 'PARA!', -5) }.to raise_error(ArgumentError, /duration must be positive/)
     end
   end

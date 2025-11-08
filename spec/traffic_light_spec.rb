@@ -19,55 +19,55 @@ RSpec.describe TrafficLight::TrafficLight do
 
   describe '#initialize' do
     # Verifica se o estado inicial e a configuração são definidas corretamente
-    it 'sets the initial state to the first state' do
+    it 'define o estado inicial como o primeiro estado' do
       expect(subject.current_state).to eq(red_state)
     end
 
-    it 'sets the states from configuration' do
+    it 'define os estados a partir da configuração' do
       expect(subject.states).to eq(states)
     end
 
-    it 'uses default configuration when none provided' do
+    it 'usa configuração padrão quando nenhuma é fornecida' do
       traffic_light = described_class.new
       expect(traffic_light.states).to eq(TrafficLight::TrafficLightConfiguration.states)
       expect(traffic_light.current_state).to eq(TrafficLight::TrafficLightConfiguration.initial_state)
     end
     
-    it 'initializes with correct current state index' do
+    it 'inicializa com índice de estado atual correto' do
       expect(subject.instance_variable_get(:@current_state_index)).to eq(0)
     end
   end
 
   describe '#next_state' do
     # Garante transições corretas e ciclo contínuo
-    it 'transitions from red to green' do
+    it 'faz transição de vermelho para verde' do
       expect { subject.next_state }.to change { subject.current_state }.from(red_state).to(green_state)
     end
 
-    it 'transitions from green to yellow' do
+    it 'faz transição de verde para amarelo' do
       subject.next_state
       expect { subject.next_state }.to change { subject.current_state }.from(green_state).to(yellow_state)
     end
 
-    it 'transitions from yellow back to red' do
+    it 'faz transição de amarelo de volta para vermelho' do
       subject.next_state
       subject.next_state
       expect { subject.next_state }.to change { subject.current_state }.from(yellow_state).to(red_state)
     end
 
-    it 'cycles continuously through states' do
-      # Go through one complete cycle (red -> green -> yellow -> red)
-      subject.next_state # green
-      subject.next_state # yellow
-      subject.next_state # red
+    it 'cicla continuamente pelos estados' do
+      # Passa por um ciclo completo (vermelho -> verde -> amarelo -> vermelho)
+      subject.next_state # verde
+      subject.next_state # amarelo
+      subject.next_state # vermelho
       expect(subject.current_state).to eq(red_state)
       
-      # Next should be green again
+      # Próximo deve ser verde novamente
       subject.next_state
       expect(subject.current_state).to eq(green_state)
     end
     
-    it 'works with default configuration' do
+    it 'funciona com configuração padrão' do
       traffic_light = described_class.new
       initial = traffic_light.current_state
       traffic_light.next_state
@@ -76,81 +76,81 @@ RSpec.describe TrafficLight::TrafficLight do
   end
 
   describe '#current_message' do
-    it 'returns the message of the current state' do
+    it 'retorna a mensagem do estado atual' do
       expect(subject.current_message).to eq('PARA!')
     end
     
-    it 'works with default configuration' do
+    it 'funciona com configuração padrão' do
       traffic_light = described_class.new
       expect(traffic_light.current_message).to eq('PARA!')
     end
   end
 
   describe '#current_duration' do
-    it 'returns the duration of the current state' do
+    it 'retorna a duração do estado atual' do
       expect(subject.current_duration).to eq(15)
     end
     
-    it 'works with default configuration' do
+    it 'funciona com configuração padrão' do
       traffic_light = described_class.new
       expect(traffic_light.current_duration).to eq(15)
     end
   end
 
   describe '#current_color' do
-    it 'returns the color of the current state' do
+    it 'retorna a cor do estado atual' do
       expect(subject.current_color).to eq('vermelho')
     end
     
-    it 'works with default configuration' do
+    it 'funciona com configuração padrão' do
       traffic_light = described_class.new
       expect(traffic_light.current_color).to eq('vermelho')
     end
   end
 
   describe '#in_state?' do
-    it 'returns true when in the specified state' do
+    it 'retorna true quando no estado especificado' do
       expect(subject.in_state?('vermelho')).to be true
     end
     
-    it 'returns false when not in the specified state' do
+    it 'retorna false quando não está no estado especificado' do
       expect(subject.in_state?('verde')).to be false
     end
     
-    it 'works with symbol argument' do
+    it 'funciona com argumento symbol' do
       expect(subject.in_state?(:vermelho)).to be true
     end
     
-    it 'updates after state transition' do
+    it 'atualiza após transição de estado' do
       subject.next_state
       expect(subject.in_state?('verde')).to be true
       expect(subject.in_state?('vermelho')).to be false
     end
   end
   
-  describe 'delegation' do
-    it 'delegates color to current_state' do
+  describe 'delegação' do
+    it 'delega color para current_state' do
       expect(subject.color).to eq('vermelho')
     end
     
-    it 'delegates message to current_state' do
+    it 'delega message para current_state' do
       expect(subject.message).to eq('PARA!')
     end
     
-    it 'delegates duration to current_state' do
+    it 'delega duration para current_state' do
       expect(subject.duration).to eq(15)
     end
   end
 
   describe '#reset' do
     # Deve retornar ao estado inicial
-    it 'resets to the initial state' do
+    it 'reseta para o estado inicial' do
       subject.next_state
       subject.next_state
       expect { subject.reset }.to change { subject.current_state }.to(red_state)
     end
     
-    it 'works with default configuration' do
+    it 'funciona com configuração padrão' do
       traffic_light = described_class.new
       traffic_light.next_state
       traffic_light.next_state
