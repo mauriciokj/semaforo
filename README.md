@@ -69,7 +69,6 @@ semaforo/
 
 - `TrafficLightState`
   - Representa um estado do semáforo com `color`, `message` e `duration`.
-  - Fornece `to_s` e comparação de igualdade.
 
 - `TrafficLightConfiguration`
   - Define os estados (`vermelho`, `verde`, `amarelo`) e o estado inicial.
@@ -119,7 +118,7 @@ Cobertura de testes é medida com `SimpleCov`. O relatório é gerado em `covera
 
 ### Cobertura Atual
 - ✅ **100%** de cobertura em todos os arquivos de `lib/`
-- ✅ **60+ testes** cobrindo todas as funcionalidades
+- ✅ **50+ testes** cobrindo todas as funcionalidades
 - ✅ Testes de validação, imutabilidade e edge cases
 
 ### Ver Relatório de Cobertura

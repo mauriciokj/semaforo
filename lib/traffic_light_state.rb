@@ -20,27 +20,6 @@ module TrafficLight
       
       freeze # Torna o objeto imutável
     end
-
-    # Retorna uma representação legível do estado
-    def to_s
-      "#{color.upcase}: #{message}"
-    end
-
-    # Compara estados por conteúdo (cor, mensagem e duração)
-    def ==(other)
-      return false unless other.is_a?(TrafficLightState)
-      
-      color == other.color &&
-        message == other.message &&
-        duration == other.duration
-    end
-    
-    alias eql? ==
-    
-    # Hash para uso em coleções (Hash, Set)
-    def hash
-      [color, message, duration].hash
-    end
     
     private
     

@@ -41,20 +41,6 @@ freeze # Torna o objeto imutável
 - Facilita raciocínio sobre o código
 - Permite uso seguro como chave de Hash
 
-#### 1.3 Implementação de `hash` e `eql?`
-```ruby
-def hash
-  [color, message, duration].hash
-end
-
-alias eql? ==
-```
-
-**Benefícios:**
-- Permite uso em `Set` e como chave de `Hash`
-- Garante consistência com `==`
-- Segue convenções Ruby
-
 ---
 
 ## 2. TrafficLight (State Machine)
@@ -169,24 +155,21 @@ private
 
 def execute_current_state
   duration = @traffic_light.current_duration
+  total_seconds = [duration.to_i, 1].max
+  sleep_time = duration / total_seconds
   
-  if short_duration?(duration)
-    execute_short_duration(duration)
-  else
-    execute_normal_duration(duration)
+  total_seconds.times do
+  break unless running?
+  
+  display_current_state
+  sleep sleep_time
   end
 end
 
-def execute_normal_duration(duration)
-  total_seconds = duration.to_i
-  
-  total_seconds.times do
-    break unless running?
-    
-    display_current_state
-    sleep DISPLAY_INTERVAL
-  end
+def transition_to_next_state
+  @traffic_light.next_state if running?
 end
+
 ```
 
 **Benefícios:**
@@ -236,10 +219,6 @@ end
 ---
 
 ## 5. Padrões de Design Aplicados
-
-### Value Object Pattern
-- `TrafficLightState` é imutável e comparável por valor
-- Implementa `==`, `eql?` e `hash` corretamente
 
 ### State Pattern
 - `TrafficLight` gerencia transições entre estados
