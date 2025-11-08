@@ -37,7 +37,8 @@ module TrafficLight
     alias current_duration duration
     alias current_color color
     
-    # Verifica se está em um estado específico
+    # Verifica se está em um estado específico(Não usado em lugar nenhum no processo. 
+    # Serve apenas para facilitar nos processos de testes)
     def in_state?(color_name)
       color == color_name.to_s
     end
